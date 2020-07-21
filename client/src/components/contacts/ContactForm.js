@@ -1,8 +1,22 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ContactContext from '../../context/contact/contactContext';
 
 const ContactForm = () => {
   const contactContext = useContext(ContactContext);
+  const { current, addContact, clearCurrent, updateContact } = contactContext;
+
+  useEffect(() => {
+    if (current !== null) {
+      setContact(current)
+    } else {
+      setContact({
+        name: '',
+        email: '',
+        phone: '',
+        type: 'personal'
+      });
+    };
+  }, [contactContext, current]);
 
   const [contact, setContact] = useState({
     name: '',
@@ -19,18 +33,32 @@ const ContactForm = () => {
 
   function onSubmit(event) {
     event.preventDefault();
-    contactContext.addContact(contact);
-    setContact({
-      name: '',
-      email: '',
-      phone: '',
-      type: 'personal'
-    });
+
+    if (current === null) {
+      addContact(contact);
+      setContact({
+        name: '',
+        email: '',
+        phone: '',
+        type: 'personal'
+      });
+    } else {
+      updateContact(contact);
+      clearCurrent();
+    };
+    clearAll();
+  };
+
+  function clearAll() {
+    clearCurrent();
   };
 
   return (
     <form onSubmit={onSubmit}>
-      <h2 className="text-primary">Adicionar Contato</h2>
+      <h2
+        className="text-primary"
+      >{current ? 'Editar Contato' : 'Adicionar Contato'}
+      </h2>
       <input
         type="text"
         placeholder="Nome"
@@ -68,11 +96,16 @@ const ContactForm = () => {
         checked={type === 'professional'}
         onChange={onChange}
       /> Profissional{' '}
-        <input
-          type="submit"
-          value="Adicionar novo contato"
-          className="btn btn-block btn-primary"
-        />
+      <input
+        type="submit"
+        value={current ? 'Atualizar Contato' : 'Adicionar novo contato'}
+        className="btn btn-block btn-primary"
+      />
+      {current &&
+        <button className="btn btn-block btn-light" onClick={clearAll}>
+          Cancelar Edição
+        </button>
+      }
     </form>
   );
 };
