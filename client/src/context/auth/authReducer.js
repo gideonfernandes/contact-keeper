@@ -42,6 +42,16 @@ export default (state, action) => {
         error: action.payload
       };
 
+  case LOGOUT:
+    localStorage.removeItem('token');
+    return {
+      ...state,
+      token: null,
+      isAuthenticated: false,
+      loading: false,
+      user: null
+    };
+
     case CLEAR_ERRORS:
       return {
         ...state,
