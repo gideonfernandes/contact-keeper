@@ -49,7 +49,11 @@ const AuthState = props => {
     };
 
     try {
-      const response = await axios.post('http://localhost:8888/api/users', formData, config);
+      const response = await axios.post(
+        'http://localhost:8888/api/users',
+        formData,
+        config
+      );
 
       dispatch({ type: REGISTER_SUCCESS, payload: response.data });
 
@@ -60,6 +64,27 @@ const AuthState = props => {
   };
 
   // Login user action
+  const loginUser = async formData => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      const response = await axios.post(
+        'http://localhost:8888/api/auth',
+        formData,
+        config
+      );
+
+      dispatch({ type: LOGIN_SUCCESS, payload: response.data });
+
+      loadUser();
+    } catch (error) {
+      dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
+    }
+  };
 
   // Logout action
 
@@ -76,7 +101,8 @@ const AuthState = props => {
         error: state.error,
         registerUser,
         clearErrors,
-        loadUser
+        loadUser,
+        loginUser
       }}
     >
       {props.children}
