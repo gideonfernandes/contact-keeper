@@ -9,8 +9,6 @@ const Contacts = () => {
 
   const { contacts, filtered, getContacts, loading } = contactContext;
 
-  console.log(contacts)
-
   useEffect(() => {
     getContacts();
     // eslint-disable-next-line
