@@ -41,9 +41,6 @@ And finally run the command in the project directory (not in the client folder):
 #### Runs the backend API and the react app concurrently in the development mode. <br /> <br />
 
 
-Open [http://localhost:8888](http://localhost:8888) to view it in the browser.
-The page will reload if you make edits.<br />
-
 ## License
 
 This project is under the MIT license.
