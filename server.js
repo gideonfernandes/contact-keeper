@@ -17,7 +17,7 @@ app.use(function(req, res, next) {
 });
 
 // Add Cors
-app.use(cors());
+app.use(cors({ origin: 'https://aqueous-river-48967.herokuapp.com' }));
 
 // Init Middleware
 app.use(express.json({ extended: false }));
