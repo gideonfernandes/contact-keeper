@@ -35,14 +35,11 @@ And in the project directory, access the client folder and then run:
 #### Install react app with all dependencies. <br /> <br />
 
 
-And finally run the command:
+And finally run the command in the project directory (not in the client folder):
 
 ### `npm run dev`
 #### Runs the backend API and the react app concurrently in the development mode. <br /> <br />
 
-
-Open [http://localhost:8888](http://localhost:8888) to view it in the browser.
-The page will reload if you make edits.<br />
 
 ## License
 
